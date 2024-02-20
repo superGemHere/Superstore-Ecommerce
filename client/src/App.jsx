@@ -1,28 +1,19 @@
-import{
-createBrowserRouter,
-RouterProvider,
-} from "react-router-dom"
+import{Routes, Route} from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path:"/",
-    element: <span>Home</span>
-  },
-  {
-    path:"/products/:id",
-    element: <span>Category</span>
-  },
-  {
-    path:"/product/:id",
-    element: <span>Product</span>
-  },
-])
+import Home from '../components/Home.jsx'
+
 
 function App() {
   return (
-    <div>
-    <RouterProvider> router={router}</RouterProvider>
-    </div>
+  <>
+  
+  <Routes>
+
+        <Route path="/" element={<Home />}/>
+    
+  </Routes>
+  
+  </>  
   );
 }
 
