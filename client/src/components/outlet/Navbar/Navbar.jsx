@@ -15,7 +15,7 @@ export default function Navbar(){
             <div className="wrapper">
                 <div className="left">
                     <div className="item" >
-                        <img src="../../../public/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}}/> 
+                        <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}}/> 
                         <KeyboardArrowDownIcon />
                     </div>
                     <div className="item">

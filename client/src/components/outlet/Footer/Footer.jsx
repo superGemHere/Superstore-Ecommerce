@@ -49,7 +49,7 @@ export default function Footer() {
           </span>
         </div>
         <div className="right" >
-            <img src="../../../public/img/payment-methods.png" alt="payment pic" />
+            <img src="/img/payment-methods.png" alt="payment pic" />
         </div>
       </div>
     </div>
