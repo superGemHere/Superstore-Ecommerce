@@ -48,8 +48,9 @@ export default function Footer() {
             {copyright} Copyright 2024. All rights reserved
           </span>
         </div>
-        <div className="right" />
+        <div className="right" >
             <img src="../../../public/img/payment-methods.png" alt="payment pic" />
+        </div>
       </div>
     </div>
   );
