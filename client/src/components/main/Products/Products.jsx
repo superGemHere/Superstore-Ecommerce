@@ -3,6 +3,8 @@ import "./products.scss"
 
 export default function Products(){
     return(
-        <h1>Products</h1>
+        <div className="products">
+
+        </div>
     );
 }
