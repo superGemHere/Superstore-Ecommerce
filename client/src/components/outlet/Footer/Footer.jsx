@@ -1,3 +1,5 @@
+import "./footer.scss"
+
 export default function Footer() {
   const copyright = String.fromCodePoint(0x00a9);
 
