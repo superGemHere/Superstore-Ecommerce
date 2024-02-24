@@ -1,6 +1,7 @@
 .slider{
     height: calc(100vh - 80px);
-    width: 100vw;
+    margin: 0 auto;
+    width: 80%;
     position: relative;
     overflow-x: hidden;
 
@@ -14,7 +15,7 @@
     img{
         width: 100vw;
         height: auto;
-        object-fit: center;
+        object-fit:fill;
     }
 
     .icons{
