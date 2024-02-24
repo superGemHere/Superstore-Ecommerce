@@ -6,9 +6,10 @@ import "./Card.scss"
 export default function Card({item}){
 
     return(
-        <Link to={`/product/${item._id}`}>
+        <Link className='link' to={`/product/${item._id}`}>
         <div className="card">
             <div className="image">
+                {item.isNew &&<span>New Collection</span>}
                 <img src={item.img1} alt={`${item.title} image`} className="mainImg" />
                 <img src={item.img2} alt={`${item.title} image`} className="secondaryImg" />
             </div>
