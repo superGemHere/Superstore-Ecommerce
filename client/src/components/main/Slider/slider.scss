@@ -3,7 +3,7 @@
     margin: 0 auto;
     width: 80%;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 
     .container{
         width: 300vw;
@@ -37,5 +37,6 @@
             justify-content: center;
             cursor: pointer;
         }
+        
     }
 }
