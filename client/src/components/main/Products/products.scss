@@ -7,6 +7,23 @@
         position: sticky;
         height: 100%;
         top: 50px;
+
+        .filter-item{
+            margin-bottom: 30px;
+
+            h2{
+               font-weight: 400;
+               margin-bottom: 20px; 
+            }
+
+            .input-item{
+                margin-bottom: 10px;
+
+                label{
+                    margin-left: 10px;
+                }
+            }
+        }
     }
 
     .right{
