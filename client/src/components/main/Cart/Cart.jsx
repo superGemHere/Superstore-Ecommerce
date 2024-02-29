@@ -1,7 +1,9 @@
 
 import "./cart.scss";
 
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+// import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+// import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 export default function Cart() {
 
@@ -44,7 +46,7 @@ export default function Cart() {
                             1 x ${item.price}
                         </div>
                     </div>
-                    <DeleteOutlinedIcon className="delete"/>
+                    <ClearOutlinedIcon className="delete"/>
                 </div>
             ))}
             <div className="totalPrice">
