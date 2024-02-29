@@ -34,7 +34,7 @@ export default function Cart() {
     return(
         <div className="cart">
             <h1>Products in your cart</h1>
-            {data?.map(item => {
+            {data?.map(item => (
                 <div className="item" key = {item._id}>
                     <img src={item.img1} alt="" />
                     <div className="details">
@@ -46,7 +46,7 @@ export default function Cart() {
                     </div>
                     <DeleteOutlinedIcon className="delete"/>
                 </div>
-            })}
+            ))}
             <div className="totalPrice">
                 <span>SUBTOTAL</span>
                 <span>$123</span>
