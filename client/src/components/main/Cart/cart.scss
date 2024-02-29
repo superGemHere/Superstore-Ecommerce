@@ -1,5 +1,8 @@
 
 .cart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     right: 20px;
     top: 80px;
@@ -50,11 +53,18 @@
             cursor: pointer;
             color: red;
             font-size: 30px;
+
+            border-radius: 50%;
+
+            &:hover{
+                color: #fff;
+                background-color: red;
+            }
         }
 
     }
 
-    .total{
+    .totalPrice{
         display: flex;
         justify-content: space-between;
         font-weight: 500;
@@ -81,5 +91,13 @@
         color: red;
         font-size: 12px;
         cursor: pointer;
+        padding: 10px;
+
+
+        &:hover{
+            color: #fff;
+            background-color: red;
+            text-transform: uppercase;
+        }
     }
 }
