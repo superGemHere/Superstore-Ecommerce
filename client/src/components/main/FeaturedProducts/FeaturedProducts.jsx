@@ -3,6 +3,9 @@ import "./featuredProducts.scss";
 
 import Card from "../Card/Card";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function FeaturedProducts(
     {type,}
 ){
@@ -46,6 +49,23 @@ export default function FeaturedProducts(
             price: 14,
         },
     ];
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const data = await axios.get(import.meta.env.VITE_APP_URL+"/products", {
+                    Authorization: "bearer" + import.meta.env.VITE_APP_TOKEN,
+                })
+
+                console.log(data)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchData()
+    }, [])
 
     return(
         <div className="featuredProducts">
