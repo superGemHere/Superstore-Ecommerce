@@ -10,8 +10,8 @@ export default function Card({item}){
         <div className="card" key={item._id}>
             <div className="image">
                 {item?.attributes.isNew &&<span>New Collection</span>}
-                <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes.img.data.attributes.url} alt={`${item?.attributes.title} image`} className="mainImg" />
-                <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes.img2.data.attributes.url} alt={`${item?.attributes.title} image`} className="secondaryImg" />
+                <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes?.img?.data?.attributes?.url} alt={`${item?.attributes.title} image`} className="mainImg" />
+                <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes?.img2?.data?.attributes?.url} alt={`${item?.attributes.title} image`} className="secondaryImg" />
             </div>
             <h2>{item?.attributes.title}</h2>
             <div className="prices">
