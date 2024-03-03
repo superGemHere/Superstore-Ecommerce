@@ -22,6 +22,8 @@ export default function FeaturedProducts(
 
     // console.log("isData", isData);
 
+    //make loading even if there is no data
+
     return(
         <div className="featuredProducts">
             {isData 
