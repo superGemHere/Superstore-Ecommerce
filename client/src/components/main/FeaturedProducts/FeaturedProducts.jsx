@@ -6,6 +6,8 @@ import Card from "../Card/Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+
 export default function FeaturedProducts(
     {type,}
 ){
@@ -16,13 +18,13 @@ export default function FeaturedProducts(
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const data = await axios.get(import.meta.env.VITE_APP_URL+"/products", {
+                const res = await axios.get(import.meta.env.VITE_APP_URL+`/products?populate=*&[filters][type][$eq]=${type}`, {
                     headers: {
                         Authorization: "bearer " + import.meta.env.VITE_APP_TOKEN
                     },
                 })
 
-                console.log(data)
+                setData(res.data.data)
             }catch(err){
                 console.log(err)
             }
@@ -30,9 +32,18 @@ export default function FeaturedProducts(
         fetchData()
     }, [])
 
+    // console.log(data);
+
+    const isData = data.length > 0 ? true : false;
+    console.log(data)
+
+    console.log("isData", isData);
+
     return(
         <div className="featuredProducts">
-            
+            {isData 
+            ?  
+            <>
             <div className="top">
                 <h1>{type} products</h1>
                 <p>
@@ -41,9 +52,17 @@ export default function FeaturedProducts(
             </div>
             <div className="bottom">
                 {data.map(item => (
-                    <Card item={item} key={item._id}/>
+                    <Card item={item} key={item.id}/>
                 ))}
-            </div>
+            </div> 
+            </>
+            : 
+            <>
+            <h2 id="noTypeProduct">There are no {type} products.</h2>
+             <ProductionQuantityLimitsIcon id="noTypeIcon"/>
+            </>
+            }
+            
         </div>
     );
 }
