@@ -3,41 +3,24 @@ import "./featuredProducts.scss";
 
 import Card from "../Card/Card";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import {TailSpin} from "react-loader-spinner";
+
 
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import useFetch from "../../../hooks/useFetch";
 
 export default function FeaturedProducts(
     {type,}
 ){
 
+    const {data, loading, error} = useFetch(`/products?populate=*&[filters][type][$eq]=${type}`);
 
-    const [data, setData] = useState([]);
+    
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const res = await axios.get(import.meta.env.VITE_APP_URL+`/products?populate=*&[filters][type][$eq]=${type}`, {
-                    headers: {
-                        Authorization: "bearer " + import.meta.env.VITE_APP_TOKEN
-                    },
-                })
-
-                setData(res.data.data)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        fetchData()
-    }, [])
-
-    // console.log(data);
-
-    const isData = data.length > 0 ? true : false;
     console.log(data)
+    const isData = data?.length > 0 ? true : false;
 
-    console.log("isData", isData);
+    // console.log("isData", isData);
 
     return(
         <div className="featuredProducts">
@@ -51,7 +34,17 @@ export default function FeaturedProducts(
                 </p>
             </div>
             <div className="bottom">
-                {data.map(item => (
+                { loading ? 
+                <TailSpin
+                visible={true}
+                height="80"
+                width="80"
+                color="#2879fe"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+                /> : data.map(item => (
                     <Card item={item} key={item.id}/>
                 ))}
             </div> 
