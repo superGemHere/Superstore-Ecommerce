@@ -34,8 +34,8 @@ export default function FeaturedProducts(
                 { loading ? 
                 <TailSpin
                 visible={true}
-                height="80"
-                width="80"
+                height="125"
+                width="125"
                 color="#2879fe"
                 ariaLabel="tail-spin-loading"
                 radius="1"
@@ -44,7 +44,7 @@ export default function FeaturedProducts(
                 />
                 : isData 
                 ?  data.map(item => (<Card item={item} key={item.id}/>))
-                : <div className="noTypeProducts"><h2 id="noTypeProduct">There are no {type} products.</h2> <ProductionQuantityLimitsIcon id="noTypeIcon"/></div>
+                : <div className="noTypeProducts"><h2 id="noTypeProduct">Sorry, currently there are no {type} products.</h2> <ProductionQuantityLimitsIcon id="noTypeIcon"/></div>
             }
             </div> 
             </>
