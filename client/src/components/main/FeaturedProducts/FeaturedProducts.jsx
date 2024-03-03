@@ -20,9 +20,6 @@ export default function FeaturedProducts(
     console.log(data)
     const isData = data?.length > 0 ? true : false;
 
-    // console.log("isData", isData);
-
-    //make loading even if there is no data
 
     return(
         <div className="featuredProducts">
