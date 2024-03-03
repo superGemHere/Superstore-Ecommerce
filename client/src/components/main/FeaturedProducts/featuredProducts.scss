@@ -24,4 +24,16 @@
         justify-content: center;
         gap: 50px;
     }
+
+    #noTypeProduct{
+        text-align: center;
+        font-family:'Courier New', Courier, monospace, sans-serif;
+    }
+
+    #noTypeIcon{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        font-size: 7em;
+    }
 }
