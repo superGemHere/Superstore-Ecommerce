@@ -26,15 +26,13 @@ export default function FeaturedProducts(
 
     return(
         <div className="featuredProducts">
-            {isData 
-            ?  
-            <>
             <div className="top">
                 <h1>{type} products</h1>
                 <p>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod ipsa modi quam accusamus impedit qui alias. Quam cumque eveniet culpa animi voluptas perspiciatis architecto accusamus, praesentium ratione a repudiandae dolorem nulla veritatis maiores quae iusto quos suscipit sapiente modi molestias vero. Laborum praesentium provident nisi at dolorem, consequatur sed quam.
                 </p>
-            </div>
+            </div> 
+            <>
             <div className="bottom">
                 { loading ? 
                 <TailSpin
@@ -46,17 +44,14 @@ export default function FeaturedProducts(
                 radius="1"
                 wrapperStyle={{}}
                 wrapperClass=""
-                /> : data.map(item => (
-                    <Card item={item} key={item.id}/>
-                ))}
+                />
+                : isData 
+                ?  data.map(item => (<Card item={item} key={item.id}/>))
+                : <div className="noTypeProducts"><h2 id="noTypeProduct">There are no {type} products.</h2> <ProductionQuantityLimitsIcon id="noTypeIcon"/></div>
+            }
             </div> 
             </>
-            : 
-            <>
-            <h2 id="noTypeProduct">There are no {type} products.</h2>
-             <ProductionQuantityLimitsIcon id="noTypeIcon"/>
-            </>
-            }
+            
             
         </div>
     );
