@@ -25,15 +25,17 @@
         gap: 50px;
     }
 
-    #noTypeProduct{
-        text-align: center;
-        font-family:'Courier New', Courier, monospace, sans-serif;
+    .noTypeProducts{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        #noTypeProduct{
+            font-family:'Courier New', Courier, monospace, sans-serif;
+        }
+    
+        #noTypeIcon{
+            font-size: 7em;
+        }
     }
 
-    #noTypeIcon{
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        font-size: 7em;
-    }
 }
