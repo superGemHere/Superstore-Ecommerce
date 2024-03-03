@@ -56,7 +56,9 @@ export default function FeaturedProducts(
         const fetchData = async () => {
             try{
                 const data = await axios.get(import.meta.env.VITE_APP_URL+"/products", {
-                    Authorization: "bearer" + import.meta.env.VITE_APP_TOKEN,
+                    headers: {
+                        Authorization: "bearer " + import.meta.env.VITE_APP_TOKEN
+                    },
                 })
 
                 console.log(data)
