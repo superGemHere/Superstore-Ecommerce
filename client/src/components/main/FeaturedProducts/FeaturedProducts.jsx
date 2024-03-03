@@ -31,7 +31,9 @@ export default function FeaturedProducts(
             </div> 
             <>
             <div className="bottom">
-                { loading ? 
+                { error 
+                ? "Something went wrong!" 
+                : (loading ? 
                 <TailSpin
                 visible={true}
                 height="125"
@@ -44,7 +46,7 @@ export default function FeaturedProducts(
                 />
                 : isData 
                 ?  data.map(item => (<Card item={item} key={item.id}/>))
-                : <div className="noTypeProducts"><h2 id="noTypeProduct">Sorry, currently there are no {type} products.</h2> <ProductionQuantityLimitsIcon id="noTypeIcon"/></div>
+                : <div className="noTypeProducts"><h2 id="noTypeProduct">Sorry, currently there are no {type} products.</h2> <ProductionQuantityLimitsIcon id="noTypeIcon"/></div>)
             }
             </div> 
             </>
