@@ -1,60 +1,49 @@
 
+import { useDispatch, useSelector } from "react-redux";
 import "./cart.scss";
 
 // import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 // import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { removeItem, resetCart } from "../../../redux/cartReducer";
 
 export default function Cart() {
 
+    const products = useSelector(state => state.cart.products);
+
+    const dispatch = useDispatch();
+
+    const totalPrice = () => {
+        let total = 0;
+
+        products.forEach((item) => (total += item.quantity * item.price));
+
+        return total.toFixed(2);
+    }
     
-    const data = [
-        {
-            _id: "d82a157c-ef25-469b-a3be-368cf0f091c1",
-            img1: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Gentle-King Suit & reeze",
-            desc: "Gentle-Kinaaaaaaaaaaaaaaaaaag Suit & reeze",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
-
-        },
-        {
-            _id: "d82e157c-ef25-469b-a3be-368cf0f091c1",
-            img1: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Gentle-King Suit & reeze",
-            desc: "Gentle-Kinaaaaaaaaaaaaaaaaaag Suit & reeze",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
-
-        },
-    ]
-
+   
     return(
         <div className="cart">
             <h1>Products in your cart</h1>
-            {data?.map(item => (
-                <div className="item" key = {item._id}>
-                    <img src={item.img1} alt="" />
+            {products?.map(item => (
+                <div className="item" key = {item.id}>
+                    <img src={import.meta.env.VITE_APP_UPLOAD_URL + item?.img} alt="" />
                     <div className="details">
                         <h1>{item.title}</h1>
                         <p>{item.desc?.substring(0, 100)}</p>
                         <div className="price">
-                            1 x ${item.price}
+                            {item.quantity} x ${item.price}
                         </div>
                     </div>
-                    <ClearOutlinedIcon className="delete"/>
+                    <ClearOutlinedIcon className="delete" onClick={() => dispatch(removeItem(item.id))}/>
                 </div>
             ))}
             <div className="totalPrice">
                 <span>SUBTOTAL</span>
-                <span>$123</span>
+                <span>${totalPrice()}</span>
             </div>
             <button>CHECKOUT</button>
-            <span className="reset">Reset Cart</span>
+            <span className="reset" onClick={() => dispatch(resetCart())}>Reset Cart</span>
         </div>
     );
 }
