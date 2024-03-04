@@ -2,6 +2,7 @@
 import { useParams } from "react-router-dom";
 import List from "../List/List";
 
+
 import "./products.scss"
 import { useState } from "react";
 import useFetch from "../../../hooks/useFetch";
@@ -13,11 +14,24 @@ export default function Products(){
 
     const catId = parseInt(useParams().id);
     const [maxPrice, setMaxPrice] = useState(1000);
-    const [sort, setSort] = useState(null);
+    const [sort, setSort] = useState("asc");
+    const [selectedSubCats, setSelectedSubCats] = useState([]);
 
     const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
 
-    console.log(data);
+    const handleChange = (e) => {
+        const value = e.target.value;
+        const isChecked = e.target.checked;
+
+        setSelectedSubCats(isChecked 
+            ? [...selectedSubCats, value] 
+            : selectedSubCats.filter(item => item !== value)
+        )
+        
+    }
+
+    // console.log(selectedSubCats);
+    
 
     return(
         <div className="products">
@@ -26,7 +40,7 @@ export default function Products(){
                     <h2>Product Categories</h2>
                     {data?.map(item => (
                             <div className="input-item" key={item.id} >
-                                <input type="checkbox" id={item.id} value={item.id} />
+                                <input type="checkbox" id={item.id} value={item.id} onChange={handleChange}/>
                                 <label htmlFor={item.id}>{item.attributes.title}</label>
                             </div>
                         )
@@ -55,7 +69,7 @@ export default function Products(){
             </div>
             <div className="right">
                 <img className="catImg" src="https://images.pexels.com/photos/396947/pexels-photo-396947.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <List catId={catId} maxPrice={maxPrice} sort={sort}/>
+                <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
             </div>
         </div>
     );
