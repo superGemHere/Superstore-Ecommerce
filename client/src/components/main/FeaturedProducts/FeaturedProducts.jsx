@@ -17,7 +17,7 @@ export default function FeaturedProducts(
 
     
 
-    console.log(data)
+    // console.log(data)
     const isData = data?.length > 0 ? true : false;
 
 
