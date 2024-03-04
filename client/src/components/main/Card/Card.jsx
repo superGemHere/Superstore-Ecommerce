@@ -1,12 +1,12 @@
 
 import {Link} from 'react-router-dom'
 
-import "./Card.scss"
+import "./card.scss";
 
 export default function Card({item}){
 
     return(
-        <Link className='link' to={`/product/${item._id}`} > 
+        <Link className='link' to={`/product/${item.id}`} > 
         <div className="card" key={item._id}>
             <div className="image">
                 {item?.attributes.isNew &&<span>New Collection</span>}
