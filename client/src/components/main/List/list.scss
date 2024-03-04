@@ -2,4 +2,18 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    .noTypeProducts{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        #noTypeProduct{
+            font-family:'Courier New', Courier, monospace, sans-serif;
+        }
+    
+        #noTypeIcon{
+            font-size: 7em;
+        }
+    }
 }
