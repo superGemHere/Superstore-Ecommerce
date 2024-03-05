@@ -10,7 +10,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
-  async create (ctx) {
+  async create(ctx) {
     const { products } = ctx.request.body;
 
     const lineItems = await Promise.all(
@@ -20,12 +20,12 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
           .findOne(product.id);
 
         return {
-          price_data: {
+          price_data:{
             currency: "usd",
             product_data: {
               name: item.title
             },
-            unit_amount: item.price * 100,
+            unit_amount: item.price*100,
           },
           quantity: item.quantity,
         };
@@ -38,7 +38,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         success_url: `${process.env.CLIENT_URL}?success=true`,
         cancel_url: `${process.env.CLIENT_URL}?success=false`,
         line_items: lineItems,
-        shipping_address_collection: { allowed_countries: ["US", "CA"] },
+        shipping_address_collection: { allowed_countries: ["BG", "US", "CA"] },
         payment_method_types: ["card"]
       });
       
@@ -51,6 +51,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
 
       return { stripeSession: session };
     } catch (err) {
+      console.log(err);
       ctx.response.status = 500;
       return err;
     }
