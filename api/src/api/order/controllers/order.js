@@ -14,46 +14,43 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
     const { products } = ctx.request.body;
 
     const lineItems = await Promise.all(
-      products.map(async (product) => {
-        const item = await strapi
+      products.map(async (item) => {
+        const product = await strapi
           .service("api::product.product")
-          .findOne(product.id);
+          .findOne(item.id);
 
         return {
-          price_data:{
+          price_data: {
             currency: "usd",
             product_data: {
-              name: "item.title"
+              name: item.title,
             },
-            unit_amount: 1*100,
+            unit_amount: item.price * 100,
           },
-          quantity: 1,
+          quantity: item.quantity,
         };
       })
     );
-
     try {
       const session = await stripe.checkout.sessions.create({
+        shipping_address_collection: { allowed_countries: ["BG", "US", "CA"] },
+        payment_method_types: ["card"],
         mode: "payment",
         success_url: `${process.env.CLIENT_URL}?success=true`,
-        cancel_url: `${process.env.CLIENT_URL}?success=false`,
+        cancel_url: `${process.env.CLIENT_URL}?canceled=false`,
         line_items: lineItems,
-        shipping_address_collection: { allowed_countries: ["BG", "US", "CA"] },
-        payment_method_types: ["card"]
       });
-      
-      await strapi.service("api::order:order").create({
+      await strapi.service("api::order.order").create({
         data: {
           products,
           stripeId: session.id,
-        }
+        },
       });
-
       return { stripeSession: session };
     } catch (err) {
-      console.log(err);
+      console.error(err)
       ctx.response.status = 500;
       return err;
     }
-  }
+  },
 }));
