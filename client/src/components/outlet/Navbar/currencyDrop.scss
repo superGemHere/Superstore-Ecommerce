@@ -1,0 +1,11 @@
+.currency_changer{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.currency_arrow:hover{
+    color: red;
+}

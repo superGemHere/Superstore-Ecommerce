@@ -14,9 +14,30 @@ import { useState } from 'react';
 
 export default function Navbar(){
 
-    const [open, setOpen] = useState(false);
+    let timeoutId;
 
-    const products = useSelector(state => state.cart.products)
+    const [open, setOpen] = useState(false);
+    const [isVisible, setVisible] = useState(false);
+
+    const products = useSelector(state => state.cart.products);
+
+    const handleArrowEnter = () => {
+        setVisible(true);
+        clearTimeout(timeoutId);
+    }
+    const handleArrowLeave = () => {
+        timeoutId =  setTimeout(()=>{setVisible(false)}, 100)
+        // setVisible(false);
+    }
+
+    const handleMenuEnter = () => {
+        setVisible(true);
+        clearTimeout(timeoutId);
+    }
+
+    const handleMenuLeave = () => {
+        timeoutId =  setTimeout(()=>{setVisible(false)}, 100)
+    }
 
     return(
         <div className="navbar">
@@ -24,7 +45,8 @@ export default function Navbar(){
                 <div className="left">
                     <div className="item" >
                         <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}}/> 
-                        <KeyboardArrowDownIcon />
+                        <KeyboardArrowDownIcon className='currency_arrow' onMouseEnter={handleArrowEnter} onMouseLeave={handleArrowLeave}/>
+                        {isVisible && <ul className='currency_changer' onMouseEnter={handleMenuEnter} onMouseLeave={handleMenuLeave}><li>USD</li><li>BGN</li></ul>}
                     </div>
                     <div className="item">
                         <span>USD</span>
