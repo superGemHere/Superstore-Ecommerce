@@ -6,9 +6,36 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative;
 
-        
+        .left .item .currency-changer{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+           
+        }
+       
+        .left.item:first-child{
+            position: relative;
+        }
+
+        .dropDown{
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            background: #777;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            p{
+                z-index: 101;
+                margin: 0;
+                padding: 0;
+            }
+        }
     }
 
     .item{

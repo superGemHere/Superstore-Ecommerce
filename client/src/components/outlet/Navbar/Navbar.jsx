@@ -22,31 +22,26 @@ export default function Navbar(){
     const products = useSelector(state => state.cart.products);
 
     const handleArrowEnter = () => {
-        setVisible(true);
-        clearTimeout(timeoutId);
-    }
-    const handleArrowLeave = () => {
-        timeoutId =  setTimeout(()=>{setVisible(false)}, 100)
-        // setVisible(false);
+        setVisible(!isVisible);
     }
 
-    const handleMenuEnter = () => {
-        setVisible(true);
-        clearTimeout(timeoutId);
-    }
-
-    const handleMenuLeave = () => {
-        timeoutId =  setTimeout(()=>{setVisible(false)}, 100)
-    }
 
     return(
         <div className="navbar">
             <div className="wrapper">
                 <div className="left">
                     <div className="item" >
-                        <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}}/> 
-                        <KeyboardArrowDownIcon className='currency_arrow' onMouseEnter={handleArrowEnter} onMouseLeave={handleArrowLeave}/>
-                        {isVisible && <ul className='currency_changer' onMouseEnter={handleMenuEnter} onMouseLeave={handleMenuLeave}><li>USD</li><li>BGN</li></ul>}
+                        <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}} /> 
+                        <div className="currency-changer">
+                        <p>Currency</p>     
+                       <KeyboardArrowDownIcon className='' onClick={handleArrowEnter}/>
+                       {isVisible &&
+                            <div className='dropDown' onClick={handleArrowEnter}>
+                                <p>USD</p>
+                                <p>BGN</p>
+                            </div>
+                       }
+                        </div>
                     </div>
                     <div className="item">
                         <span>USD</span>
