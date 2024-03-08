@@ -34,7 +34,7 @@ export default function Navbar(){
                         <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}} /> 
                         <div className="currency-changer">
                         <p>Currency</p>     
-                       <KeyboardArrowDownIcon className='' onClick={handleArrowEnter}/>
+                       <KeyboardArrowDownIcon onClick={handleArrowEnter}/>
                        {isVisible &&
                             <div className='dropDown' onClick={handleArrowEnter}>
                                 <p>USD</p>
