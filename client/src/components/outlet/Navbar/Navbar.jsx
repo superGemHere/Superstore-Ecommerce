@@ -8,7 +8,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-import CurrencyContext from '../../../context/CurrencyProvider.jsx'
+import CurrencyContext from '../../../context/CurrencyProvider.jsx';
 
 
 import Cart from "../../main/Cart/Cart";
