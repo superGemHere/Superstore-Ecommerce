@@ -1,32 +1,33 @@
-import { useState } from 'react'
-import {Routes, Route} from 'react-router-dom'
+import { useState, useContext } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Home from './components/main/Home/Home.jsx';
-import Product from './components/main/Product/Product.jsx';
-import Products from './components/main/Products/Products.jsx';
+import Home from "./components/main/Home/Home.jsx";
+import Product from "./components/main/Product/Product.jsx";
+import Products from "./components/main/Products/Products.jsx";
 
-import Navbar from './components/outlet/Navbar/Navbar.jsx';
-import Footer from './components/outlet/Footer/Footer.jsx';
+import {CurrencyProvider}  from "./context/CurrencyProvider.jsx";
 
-import './app.scss'
+import Navbar from "./components/outlet/Navbar/Navbar.jsx";
+import Footer from "./components/outlet/Footer/Footer.jsx";
+
+import "./app.scss";
 
 function App() {
-
   return (
-    <div  className= "app">
-    <Navbar />
+    <div className="app">
+      <CurrencyProvider>
+        <Navbar />
 
-      <Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/products/:id" element={<Products />} />
+        </Routes>
 
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/products/:id" element={<Products />} />
-
-      </Routes>
-
-    <Footer />
+        <Footer />
+      </CurrencyProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
