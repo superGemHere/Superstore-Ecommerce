@@ -20,20 +20,37 @@
             position: relative;
         }
 
+        .color:hover{
+            background-color: deepskyblue;
+        }
+
+        .p{
+            display: flex;
+        }
+
         .dropDown{
             display: flex;
             flex-direction: column;
             position: absolute;
             top: 50px;
             width: 100%;
-            background: #777;
+            background-color: deepskyblue;
             z-index: 100;
             align-items: center;
             justify-content: center;
+            
             p{
                 z-index: 101;
                 margin: 0;
                 padding: 0;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+
+                &:hover{
+                    color: #fff;
+                    
+                }
             }
         }
     }

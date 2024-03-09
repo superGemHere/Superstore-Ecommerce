@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -14,8 +15,7 @@ import { useState } from 'react';
 
 export default function Navbar(){
 
-    let timeoutId;
-
+    const [currency, setCurrency] = useState("USD")
     const [open, setOpen] = useState(false);
     const [isVisible, setVisible] = useState(false);
 
@@ -25,26 +25,35 @@ export default function Navbar(){
         setVisible(!isVisible);
     }
 
+    const currencyHandler = async (e) => {
+        setCurrency(e.target.innerHTML)
+        // console.log(currency);
+    }
+
+    const isUsd = currency == "USD" ? true : false 
 
     return(
         <div className="navbar">
             <div className="wrapper">
                 <div className="left">
                     <div className="item" >
-                        <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}} /> 
+                        {   isUsd 
+                        ? <img src="/img/pngwing.com.png" alt="" style={{width: "40px", height:"auto"}} />
+                        : <img src="/img/flagBul.png" alt="" style={{width: "40px", height:"auto"}} />
+                        }
                         <div className="currency-changer">
-                        <p>Currency</p>     
-                       <KeyboardArrowDownIcon onClick={handleArrowEnter}/>
+                        <p className='color p' onClick={handleArrowEnter}>Currency {!isVisible ? <KeyboardArrowDownIcon className='color' /> : <KeyboardArrowUpIcon className='color' onClick={handleArrowEnter} /> }</p>     
+                       
                        {isVisible &&
                             <div className='dropDown' onClick={handleArrowEnter}>
-                                <p>USD</p>
-                                <p>BGN</p>
+                                <p onClick={(e) => currencyHandler(e) }>USD</p>
+                                <p onClick={(e) => currencyHandler(e) }>BGN</p>
                             </div>
                        }
                         </div>
                     </div>
                     <div className="item">
-                        <span>USD</span>
+                        {isUsd ? <span>USD</span> : <span>BGN</span>}
                     </div>
                     <div className="item">
                         <Link className='link' to="/products/1">Men</Link>
