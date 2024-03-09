@@ -8,14 +8,18 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
+import CurrencyContext from '../../../context/CurrencyProvider.jsx'
+
+
 import Cart from "../../main/Cart/Cart";
 
-import './navbar.scss'
-import { useState } from 'react';
+import './navbar.scss';
+import { useState, useContext } from 'react';
 
 export default function Navbar(){
 
-    const [currency, setCurrency] = useState("USD")
+    const {currency, currencyHandler} = useContext(CurrencyContext);
+
     const [open, setOpen] = useState(false);
     const [isVisible, setVisible] = useState(false);
 
@@ -23,11 +27,6 @@ export default function Navbar(){
 
     const handleArrowEnter = () => {
         setVisible(!isVisible);
-    }
-
-    const currencyHandler = async (e) => {
-        setCurrency(e.target.innerHTML)
-        // console.log(currency);
     }
 
     const isUsd = currency == "USD" ? true : false 
