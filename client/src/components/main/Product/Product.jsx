@@ -12,6 +12,11 @@ import {TailSpin} from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/cartReducer";
 
+import CurrencyContext from '../../../context/CurrencyProvider.jsx';
+
+import { useContext } from 'react';
+
+
 
 // import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
@@ -25,6 +30,10 @@ export default function Product(){
     const dispatch = useDispatch();
     const {data, loading, error} = 
     useFetch(`/products/${id}?populate=*`);
+
+    const {currency, currencyHandler} = useContext(CurrencyContext);
+
+    const isUsd = currency == "USD" ? true : false;
 
     return(
         <div className="product">
@@ -42,7 +51,7 @@ export default function Product(){
             </div>
             <div className="right">
                 <h1>{data?.attributes?.title}</h1>
-                <span className="price">${data?.attributes?.price}</span>
+                <span className="price">{isUsd ? `$ ${data?.attributes.price}` : `BGN ${(data?.attributes.price * 1.79).toFixed(2)}`} </span>
                 <p>{data?.attributes?.desc}</p>
                 <div className="quantity">
                     <button onClick={() => setQuantity(prev => (prev === 1 ? 1 : prev - 1))}>-</button>
