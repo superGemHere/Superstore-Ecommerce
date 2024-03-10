@@ -1,9 +1,19 @@
 
 import {Link} from 'react-router-dom'
+import CurrencyContext from '../../../context/CurrencyProvider.jsx';
+
+import { useContext } from 'react';
+
+
+
 
 import "./card.scss";
 
 export default function Card({item}){
+
+    const {currency, currencyHandler} = useContext(CurrencyContext);
+
+    const isUsd = currency == "USD" ? true : false
 
     return(
         <Link className='link' to={`/product/${item.id}`} > 
@@ -15,8 +25,8 @@ export default function Card({item}){
             </div>
             <h2>{item?.attributes.title}</h2>
             <div className="prices">
-               <h3>${item.oldPrice || item?.attributes.price * 1.7}</h3> 
-               <h3>${item?.attributes.price}</h3> 
+               <h3>{isUsd ? `$ ${item.oldPrice || item?.attributes.price * 1.7}` : `BGN ${((item.oldPrice || item?.attributes.price * 1.7) * 1.79).toFixed(2)}`} </h3> 
+               <h3>{isUsd ? `$ ${item?.attributes.price}` : `BGN ${(item?.attributes.price * 1.79).toFixed(2)}`} </h3> 
             </div>
         </div>
         </Link>
