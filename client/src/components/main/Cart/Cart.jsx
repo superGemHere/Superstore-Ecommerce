@@ -9,16 +9,26 @@ import { removeItem, resetCart } from "../../../redux/cartReducer";
 import { loadStripe } from '@stripe/stripe-js';
 import { makeRequest } from "../../../lib/makeRequest";
 
+import CurrencyContext from '../../../context/CurrencyProvider.jsx';
+
+import { useContext } from 'react';
+
 export default function Cart() {
 
     const products = useSelector(state => state.cart.products);
 
     const dispatch = useDispatch();
 
+    const {currency, currencyHandler} = useContext(CurrencyContext);
+
+    const isUsd = currency == "USD" ? true : false;
+    
+
     const totalPrice = () => {
         let total = 0;
 
-        products.forEach((item) => (total += item.quantity * item.price));
+        isUsd ?  products.forEach((item) => (total += item.quantity * item.price)) : products.forEach((item) => (total += item.quantity * (item.price * 1.79)));
+       
 
         return total.toFixed(2);
     }
@@ -43,6 +53,7 @@ export default function Cart() {
         }
 
     }
+
     
    
     return(
@@ -55,7 +66,7 @@ export default function Cart() {
                         <h1>{item.title}</h1>
                         <p>{item.desc?.substring(0, 100)}</p>
                         <div className="price">
-                            {item.quantity} x ${item.price}
+                            {item.quantity} x {isUsd ? `$ ${item?.price}` : `BGN ${(item?.price * 1.79).toFixed(2)}`}
                         </div>
                     </div>
                     <ClearOutlinedIcon className="delete" onClick={() => dispatch(removeItem(item.id))}/>
@@ -63,7 +74,7 @@ export default function Cart() {
             ))}
             <div className="totalPrice">
                 <span>SUBTOTAL</span>
-                <span>${totalPrice()}</span>
+                <span>{isUsd ? "$ " : "BGN " }{totalPrice()}</span>
             </div>
             <button onClick={handlePayment}>CHECKOUT</button>
             <span className="reset" onClick={() => dispatch(resetCart())}>Reset Cart</span>
